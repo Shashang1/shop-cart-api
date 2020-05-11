@@ -11,7 +11,8 @@ const {
 const config = {
   DB_HOST,
   DB_NAME,
-  DB_PORT
+  DB_PORT,
+  secret: 'jwt-token-secret'
 }
 
 module.exports = config

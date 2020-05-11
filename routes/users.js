@@ -1,13 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express')
+const router = express.Router()
 
-const ProductRoutes = require('../api/product/index')
+const validatorArray = require('../validator/validatorArray')
+const validatorFunction = require('../validator/validatorFunction')
+const userController = require('../controllers/userController')
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
-});
-
-router.use('/product', ProductRoutes)
+router.post('/signup', validatorArray.signup, validatorFunction.signup, userController.signup)
 
 module.exports = router;
