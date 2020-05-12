@@ -8,6 +8,10 @@ const validatorArray = {
     check('password').notEmpty().isLength({ min: 6 }).withMessage('password invalid'),
     check('phone').notEmpty().isMobilePhone().withMessage('phone number invalid'),
     check('address').notEmpty().withMessage('address invalid')
+  ],
+  login: [
+    check('email').notEmpty().isEmail().withMessage('invalid email'),
+    check('password').notEmpty().isLength({ min: 6 }).withMessage('password invalid')
   ]
 }
 
