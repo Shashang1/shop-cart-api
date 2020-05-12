@@ -6,5 +6,6 @@ const validatorFunction = require('../validator/validatorFunction')
 const userController = require('../controllers/userController')
 
 router.post('/signup', validatorArray.signup, validatorFunction.signup, userController.signup)
+router.post('/login', userController.login)
 
 module.exports = router;

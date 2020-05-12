@@ -33,6 +33,35 @@ const userController = {
       }
     } catch (error) { console.log(error) }
   },
+  login: async (req, res) => {
+    const { email, password } = req.body
+    try {
+      const user = await userModel.findOne({ email })
+
+      if (!user) res.status(400).send({ error: 'username or password invalid' })
+
+      else {
+        const result = await bcrypt.compare(password, user.password)
+        if (result) {
+          const userData = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            address: user.address,
+            phone: user.phone,
+            email: user.email
+          }
+          const token = await jwt.sign(
+            { userId: user._id, username: user.email },
+            config.secret,
+            { expiresIn: '1h' }
+          )
+
+          await res.status(200).send({ userData, token })
+        }
+        else { res.status(400).send({ error: 'username or email invalid' }) }
+      }
+    } catch (error) { console.log(error) }
+  }
 }
 
 module.exports = userController
